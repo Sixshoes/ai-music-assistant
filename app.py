@@ -1,11 +1,16 @@
+import os
+import sys
+
+# 添加專案根目錄到 Python 路徑
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, project_root)
+
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import magenta
 import note_seq
 from note_seq.protobuf import music_pb2
-import os
 import tempfile
-import sys
 import logging
 import json
 from typing import Dict, Any, Optional
