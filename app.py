@@ -9,6 +9,7 @@ import sys
 import logging
 import json
 from typing import Dict, Any, Optional
+from backend.models import init_db
 
 # 配置日誌
 logging.basicConfig(level=logging.INFO, 
@@ -24,6 +25,13 @@ except ImportError:
 
 app = Flask(__name__)
 CORS(app)
+
+# 資料庫配置
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///music_assistant.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 初始化資料庫
+init_db(app)
 
 # 確保輸出目錄存在
 output_dir = os.path.join(os.path.dirname(__file__), 'output')
