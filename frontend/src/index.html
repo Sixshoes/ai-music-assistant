@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI音樂創作助手</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI音樂創作助手</h1>
+      <p>使用自然語言描述您想要的音樂，我們的AI將為您創作</p>
+    </header>
+    
+    <main>
+      <section class="music-creator">
+        <h2>創作您的音樂</h2>
+        <form id="musicForm">
+          <div class="form-group">
+            <label for="musicDescription">音樂描述</label>
+            <textarea id="musicDescription" rows="4" placeholder="例如：創作一首平靜的古典音樂，帶有中國傳統元素，適合沉思和冥想"></textarea>
+          </div>
+          
+          <div class="form-group-inline">
+            <label>
+              <input type="checkbox" id="useLLM"> 
+              使用大語言模型增強分析（可能較慢）
+            </label>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" id="generateBtn">生成音樂</button>
+          </div>
+        </form>
+      </section>
+      
+      <section class="result-section hidden" id="resultSection">
+        <h2>生成結果</h2>
+        <div class="result-content">
+          <div id="resultMessage"></div>
+          <div id="musicPlayer" class="hidden">
+            <h3>預覽您的音樂</h3>
+            <audio id="audioPlayer" controls></audio>
+            <div class="download-actions">
+              <button id="downloadBtn">下載MIDI文件</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="loading-section hidden" id="loadingSection">
+        <div class="loader"></div>
+        <p>正在創作您的音樂，這可能需要幾秒鐘...</p>
+      </section>
+    </main>
+    
+    <footer>
+      <p>© 2023 AI音樂創作助手 | 使用先進的AI技術，將您的想法轉化為音樂</p>
+    </footer>
+  </div>
+  
+  <script src="scripts/main.js"></script>
+</body>
+</html> 

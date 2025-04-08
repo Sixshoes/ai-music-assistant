@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 音樂助手 - 預覽</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1, h2 {
+            color: #1976d2;
+        }
+        .player {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1565c0;
+        }
+        .note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI 音樂助手 - 音樂預覽</h1>
+    
+    <div>
+        <p>這個頁面顯示由 Magenta 服務生成的 MIDI 文件。您可以點擊按鈕播放音樂。</p>
+    </div>
+    
+    <h2>生成的旋律</h2>
+    <div class="player">
+        <div id="player1">
+            <button id="play1">播放旋律</button>
+            <button id="stop1">停止</button>
+            <div class="note">melody_demo.mid - 32 個音符的旋律</div>
+        </div>
+    </div>
+    
+    <h2>根據文本生成的旋律</h2>
+    <div class="player">
+        <div id="player2">
+            <button id="play2">播放旋律</button>
+            <button id="stop2">停止</button>
+            <div class="note">text_melody_demo.mid - 根據「快樂的夏日旋律，充滿活力」生成</div>
+        </div>
+    </div>
+    
+    <h2>其他選項</h2>
+    <div class="player">
+        <p>您也可以下載 MIDI 文件並在您喜愛的音樂軟件中打開：</p>
+        <a href="melody_demo.mid" download><button>下載旋律 MIDI</button></a>
+        <a href="text_melody_demo.mid" download><button>下載文本旋律 MIDI</button></a>
+    </div>
+    
+    <div class="note">
+        <p>注意：</p>
+        <ul>
+            <li>MIDI 文件需要在支持 MIDI 的應用程序中打開</li>
+            <li>在 Mac 上，您可以使用 GarageBand 或 QuickTime Player</li>
+            <li>在 Windows 上，您可以使用 Windows Media Player 或 MIDI 播放器</li>
+        </ul>
+    </div>
+    
+    <hr>
+    <div>
+        <p>如果您想運行完整的 AI 音樂助手應用，需要正確安裝所有依賴並啟動前端和後端服務。</p>
+    </div>
+
+    <!-- 使用簡單的 MIDI 播放器 -->
+    <script>
+        // 簡單的 MIDI 文件下載和播放函數
+        function setupMidiButtons() {
+            document.getElementById('play1').addEventListener('click', function() {
+                window.open('melody_demo.mid', '_blank');
+            });
+            
+            document.getElementById('play2').addEventListener('click', function() {
+                window.open('text_melody_demo.mid', '_blank');
+            });
+            
+            document.getElementById('stop1').addEventListener('click', function() {
+                alert('請在打開的窗口或應用程序中停止播放');
+            });
+            
+            document.getElementById('stop2').addEventListener('click', function() {
+                alert('請在打開的窗口或應用程序中停止播放');
+            });
+        }
+        
+        // 在頁面加載完成後設置按鈕
+        window.addEventListener('DOMContentLoaded', setupMidiButtons);
+    </script>
+</body>
+</html> 

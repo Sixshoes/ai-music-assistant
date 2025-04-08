@@ -1,0 +1,228 @@
+/* 重置樣式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* 更易於計算的基本字體大小 */
+  font-size: 16px;
+  /* 啟用平滑滾動，改善觸控體驗 */
+  scroll-behavior: smooth;
+  /* 改善文本渲染 */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 提高可讀性 */
+  line-height: 1.5;
+  /* 改善長文本的閱讀體驗 */
+  text-rendering: optimizeLegibility;
+  /* 確保充滿整個視口高度 */
+  min-height: 100vh;
+  /* 處理溢出 */
+  overflow-x: hidden;
+}
+
+/* 觸摸優化 */
+@media (pointer: coarse) {
+  /* 增加所有交互元素的區域 */
+  button, 
+  input[type="button"], 
+  input[type="submit"],
+  input[type="reset"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* 增加表單元素點擊區域 */
+  input, 
+  select, 
+  textarea {
+    padding: 12px;
+    font-size: 16px; /* 防止iOS縮放 */
+  }
+}
+
+/* 通用樣式 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 添加清除浮動的工具類 */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 響應式間距調整 */
+.section {
+  padding: 2rem 0;
+}
+
+/* 響應式設計 - 多斷點 */
+/* 小型移動設備 */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .section {
+    padding: 1rem 0;
+  }
+  
+  /* 隱藏非必要元素 */
+  .hide-xs {
+    display: none !important;
+  }
+}
+
+/* 平板和大型手機 */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  /* 隱藏非必要元素 */
+  .hide-sm {
+    display: none !important;
+  }
+}
+
+/* 中等屏幕 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hide-md {
+    display: none !important;
+  }
+}
+
+/* 大屏幕 */
+@media (min-width: 1025px) {
+  .hide-lg {
+    display: none !important;
+  }
+}
+
+/* 高度相關的媒體查詢 */
+@media (max-height: 600px) {
+  .section {
+    padding: 1rem 0;
+  }
+}
+
+/* 屏幕方向相關的媒體查詢 */
+@media (orientation: portrait) {
+  /* 縱向屏幕的樣式 */
+  .portrait-only {
+    display: block;
+  }
+  
+  .landscape-only {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  /* 橫向並且高度較小時的樣式 */
+  .portrait-only {
+    display: none;
+  }
+  
+  .landscape-only {
+    display: block;
+  }
+  
+  /* 增加小高度設備的可用空間 */
+  .compact-layout {
+    margin: 0;
+    padding: 0.5rem;
+  }
+}
+
+/* 減少動畫以改善性能 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 暗黑模式支持 */
+@media (prefers-color-scheme: dark) {
+  body.auto-dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+  }
+}
+
+/* 動畫 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* 懶加載元素的預留位置 */
+.lazy-placeholder {
+  background-color: #f0f0f0;
+  min-height: 100px;
+}
+
+/* 加載指示器通用樣式 */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+/* 觸控反饋 */
+@media (hover: hover) {
+  .hover-effect:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+  }
+}
+
+/* 移動設備專用滾動條樣式 */
+@media (max-width: 768px) {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+}
+
+/* 輸入框獲得焦點時提高可見度 */
+input:focus, 
+textarea:focus, 
+select:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+} 

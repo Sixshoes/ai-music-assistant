@@ -1,0 +1,16 @@
+{
+  "name": "AI 音樂助手",
+  "short_name": "AI Music",
+  "description": "使用 AI 技術的音樂創作助手",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+} 

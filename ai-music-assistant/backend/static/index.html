@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI音樂助手 - 測試頁面</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        textarea, input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #4CAF50; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ddd; min-height: 100px; }
+        #status { color: #666; }
+    </style>
+</head>
+<body>
+    <h1>AI音樂助手 - API測試</h1>
+    <div class="form-group">
+        <label for="text">文字描述:</label>
+        <textarea id="text" rows="4">創作一首輕快的流行音樂</textarea>
+    </div>
+    <div class="form-group">
+        <label for="tempo">速度 (BPM):</label>
+        <input type="number" id="tempo" value="120" min="40" max="240">
+    </div>
+    <div class="form-group">
+        <label for="key">調性:</label>
+        <select id="key">
+            <option value="C">C大調</option>
+            <option value="G">G大調</option>
+            <option value="D">D大調</option>
+            <option value="A">A大調</option>
+            <option value="Am">A小調</option>
+            <option value="Em">E小調</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="genre">風格:</label>
+        <select id="genre">
+            <option value="pop">流行</option>
+            <option value="rock">搖滾</option>
+            <option value="jazz">爵士</option>
+            <option value="classical">古典</option>
+        </select>
+    </div>
+    <button id="submit">生成音樂</button>
+    <div id="status"></div>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', async () => {
+            const text = document.getElementById('text').value;
+            const tempo = parseInt(document.getElementById('tempo').value);
+            const key = document.getElementById('key').value;
+            const genre = document.getElementById('genre').value;
+            
+            document.getElementById('status').textContent = '處理中...';
+            
+            try {
+                // 發送文字到音樂請求
+                const response = await fetch('/api/text-to-music', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text,
+                        parameters: {
+                            description: text,
+                            tempo,
+                            key,
+                            genre,
+                            instruments: ['piano', 'guitar'],
+                            duration: 60,
+                            complexity: 3
+                        }
+                    }),
+                });
+                
+                const data = await response.json();
+                document.getElementById('status').textContent = `命令ID: ${data.command_id}`;
+                
+                // 輪詢命令狀態
+                if (data.command_id) {
+                    pollStatus(data.command_id);
+                }
+            } catch (error) {
+                document.getElementById('status').textContent = `錯誤: ${error.message}`;
+            }
+        });
+        
+        async function pollStatus(commandId) {
+            try {
+                const response = await fetch('/api/command-status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        command_id: commandId
+                    }),
+                });
+                
+                const data = await response.json();
+                document.getElementById('status').textContent = `狀態: ${data.status}`;
+                
+                if (data.status === 'completed') {
+                    // 獲取結果
+                    getMusicResult(commandId);
+                } else if (data.status === 'processing') {
+                    // 繼續輪詢
+                    setTimeout(() => pollStatus(commandId), 2000);
+                }
+            } catch (error) {
+                document.getElementById('status').textContent = `輪詢錯誤: ${error.message}`;
+            }
+        }
+        
+        async function getMusicResult(commandId) {
+            try {
+                const response = await fetch(`/api/music-result/${commandId}`);
+                const data = await response.json();
+                
+                document.getElementById('result').innerHTML = `
+                    <h3>音樂生成完成</h3>
+                    <p>調性: ${data.analysis.key}</p>
+                    <p>速度: ${data.analysis.tempo} BPM</p>
+                    <audio controls src="/api/play-audio/${commandId}"></audio>
+                `;
+            } catch (error) {
+                document.getElementById('status').textContent = `獲取結果錯誤: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

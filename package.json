@@ -1,0 +1,39 @@
+{
+  "name": "ai-music-assistant",
+  "version": "1.0.0",
+  "description": "AI音樂助手應用",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint './frontend/src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint './frontend/src/**/*.{js,jsx,ts,tsx}' --fix",
+    "format": "prettier --write './frontend/src/**/*.{js,jsx,ts,tsx,css,scss}'",
+    "pylint": "pylint backend/",
+    "pyformat": "isort backend/ && autoflake --remove-all-unused-imports --in-place --recursive backend/ && black backend/"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.1.0"
+  },
+  "lint-staged": {
+    "frontend/src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "backend/**/*.py": [
+      "isort",
+      "autoflake --remove-all-unused-imports --in-place",
+      "black"
+    ]
+  },
+  "dependencies": {
+    "uuid": "^11.1.0"
+  }
+}

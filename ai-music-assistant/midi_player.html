@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI 音樂播放器</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .midi-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .midi-item {
+            flex: 1 0 calc(50% - 15px);
+            min-width: 200px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MIDI 音樂播放器</h1>
+        <p>這個頁面使用 MIDI.js 來播放各種風格和調性的 MIDI 文件。您可以比較不同風格和調性之間的區別。</p>
+        
+        <div class="section">
+            <h2>基礎音樂元素</h2>
+            
+            <div class="midi-group">
+                <div class="midi-item">
+                    <h3>C大調音階</h3>
+                    <button onclick="playMIDI('c_scale.mid')">播放</button>
+                    <div class="note">標準C大調音階，聽聽音符之間的關係。</div>
+                </div>
+                
+                <div class="midi-item">
+                    <h3>和弦進行</h3>
+                    <button onclick="playMIDI('chord_progression.mid')">播放</button>
+                    <div class="note">常見的C大調和弦進行 (C-F-G-C)。</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>不同風格的旋律</h2>
+            
+            <div class="midi-group">
+                <div class="midi-item">
+                    <h3>流行風格 (C調)</h3>
+                    <button onclick="playMIDI('pop_c.mid')">播放</button>
+                    <div class="note">流行音樂風格的旋律，使用C大調。</div>
+                </div>
+                
+                <div class="midi-item">
+                    <h3>搖滾風格 (C調)</h3>
+                    <button onclick="playMIDI('rock_c.mid')">播放</button>
+                    <div class="note">搖滾風格的旋律，節奏更加強烈。</div>
+                </div>
+                
+                <div class="midi-item">
+                    <h3>爵士風格 (C調)</h3>
+                    <button onclick="playMIDI('jazz_c.mid')">播放</button>
+                    <div class="note">爵士風格的旋律，更複雜的節奏和和聲。</div>
+                </div>
+                
+                <div class="midi-item">
+                    <h3>古典風格 (C調)</h3>
+                    <button onclick="playMIDI('classical_c.mid')">播放</button>
+                    <div class="note">古典風格的旋律，更加優雅。</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>鋼琴演奏示例</h2>
+            
+            <div class="midi-group">
+                <div class="midi-item">
+                    <h3>鋼琴旋律</h3>
+                    <button onclick="playMIDI('piano_melody.mid')">播放</button>
+                    <div class="note">古典風格的鋼琴旋律。</div>
+                </div>
+                
+                <div class="midi-item">
+                    <h3>鋼琴琶音</h3>
+                    <button onclick="playMIDI('piano_arpeggios.mid')">播放</button>
+                    <div class="note">鋼琴琶音練習，展示不同和弦的分解。</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>簡單旋律</h2>
+            <div class="midi-group">
+                <div class="midi-item">
+                    <h3>簡單旋律</h3>
+                    <button onclick="playMIDI('simple_melody.mid')">播放</button>
+                    <div class="note">一個簡單的隨機生成旋律。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MIDI.js 庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/midi.js@0.3.0/build/midi.min.js"></script>
+    <script>
+        // 初始化 MIDI.js
+        function initMIDI() {
+            MIDI.loadPlugin({
+                soundfontUrl: "https://gleitz.github.io/midi-js-soundfonts/FluidR3_GM/",
+                instrument: "acoustic_grand_piano",
+                onprogress: function(state, progress) {
+                    console.log(state, progress);
+                },
+                onsuccess: function() {
+                    console.log("MIDI.js 已成功加載");
+                }
+            });
+        }
+
+        // 播放 MIDI 文件
+        function playMIDI(filename) {
+            // 這裡使用 MIDI.js 播放 MIDI 文件
+            // 由於瀏覽器安全限制，我們實際上是通過引導用戶下載並在本地播放
+            const a = document.createElement('a');
+            a.href = filename;
+            a.download = filename;
+            a.click();
+            
+            alert(`請使用本地 MIDI 播放器打開 "${filename}"\n(由於瀏覽器限制，無法直接在網頁中播放 MIDI 文件)`);
+        }
+
+        // 頁面加載時初始化 MIDI.js
+        window.onload = function() {
+            try {
+                initMIDI();
+            } catch (e) {
+                console.error("MIDI.js 加載失敗:", e);
+            }
+        };
+    </script>
+</body>
+</html> 

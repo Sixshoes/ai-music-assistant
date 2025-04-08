@@ -1,0 +1,18 @@
+{
+  "typeCheckingMode": "off",
+  "reportMissingImports": false,
+  "reportMissingTypeStubs": false,
+  "reportUntypedNamedTuple": false,
+  "reportGeneralTypeIssues": false,
+  "reportOptionalMemberAccess": false,
+  "pythonVersion": "3.9",
+  "pythonPlatform": "Darwin",
+  "executionEnvironments": [
+    {
+      "root": "backend",
+      "extraPaths": [
+        "${workspaceFolder}/magenta_env/lib/python3.13/site-packages"
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,71 @@
+{
+  "description": "創造一段悠揚的小提琴旋律，帶有中國風的意境",
+  "parameters": {
+    "tempo": 90,
+    "key": "D",
+    "genre": "classical"
+  },
+  "melody": [
+    {
+      "pitch": 60,
+      "start_time": 0.0,
+      "duration": 0.5,
+      "velocity": 80
+    },
+    {
+      "pitch": 62,
+      "start_time": 0.5,
+      "duration": 0.5,
+      "velocity": 80
+    },
+    {
+      "pitch": 64,
+      "start_time": 1.0,
+      "duration": 0.5,
+      "velocity": 80
+    },
+    {
+      "pitch": 65,
+      "start_time": 1.5,
+      "duration": 0.5,
+      "velocity": 80
+    }
+  ],
+  "chords": [
+    {
+      "chord_name": "D",
+      "start_time": 0.0,
+      "duration": 1.0
+    },
+    {
+      "chord_name": "F#m",
+      "start_time": 0.5,
+      "duration": 0.5
+    },
+    {
+      "chord_name": "G",
+      "start_time": 1.0,
+      "duration": 1.0
+    },
+    {
+      "chord_name": "A",
+      "start_time": 1.5,
+      "duration": 0.5
+    },
+    {
+      "chord_name": "F#m7",
+      "start_time": 2.0,
+      "duration": 0.5
+    },
+    {
+      "chord_name": "G",
+      "start_time": 2.5,
+      "duration": 0.5
+    },
+    {
+      "chord_name": "D",
+      "start_time": 3.0,
+      "duration": 1.0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>音樂筆記</title>
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M12,3 L12,13.55 C11.41,13.21 10.73,13 10,13 C7.79,13 6,14.79 6,17 C6,19.21 7.79,21 10,21 C12.21,21 14,19.21 14,17 L14,7 L18,7 L18,3 L12,3 Z M10,19 C8.9,19 8,18.1 8,17 C8,15.9 8.9,15 10,15 C11.1,15 12,15.9 12,17 C12,18.1 11.1,19 10,19 Z" fill="#3F51B5" fill-rule="nonzero"></path>
+    </g>
+</svg> 

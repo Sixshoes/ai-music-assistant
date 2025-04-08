@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="AI音樂助手" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- 字體預加載 -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" as="style" />
+    
+    <!-- 字體樣式 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    
+    <!-- 優化資源加載 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/images/placeholder.png" />
+    
+    <!-- 預加載音頻資源 -->
+    <link rel="preload" as="fetch" href="/sounds/click.mp3" crossorigin />
+    
+    <!-- 預加載Web Audio API -->
+    <script>
+      // 在用戶首次互動時初始化Web Audio API
+      window.addEventListener('DOMContentLoaded', () => {
+        const initAudioContext = () => {
+          // 創建並緩存AudioContext，但尚未啟動
+          if (!window.cachedAudioContext) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) {
+              window.cachedAudioContext = new AudioCtx();
+            }
+          }
+          
+          // 移除事件監聽器
+          ['click', 'touchstart', 'keydown'].forEach(event => {
+            document.removeEventListener(event, initAudioContext);
+          });
+        };
+        
+        // 監聽用戶互動事件
+        ['click', 'touchstart', 'keydown'].forEach(event => {
+          document.addEventListener(event, initAudioContext);
+        });
+      });
+    </script>
+    
+    <title>AI音樂助手</title>
+  </head>
+  <body>
+    <noscript>您需要啟用JavaScript才能運行此應用程序。</noscript>
+    <div id="root"></div>
+  </body>
+</html> 
